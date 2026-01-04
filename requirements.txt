@@ -1,0 +1,15 @@
+pydantic
+returns
+mypy
+fastapi
+uvicorn
+httpx
+openai
+google-genai
+xai-sdk
+anthropic
+pytest
+pytest-asyncio
+pytest-mock
+python-json-logger
+cachetools
