@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  llm-router:
+    build:
+      target: runtime
+
+    # Override command for hot reload
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+    # Mount source code for hot reload
+    volumes:
+      - ./src:/app/src:ro
+      - llm-cache:/app/.cache
+
+    # Development environment variables
+    environment:
+      LOG_LEVEL: DEBUG
+
+    # Expose debugger port
+    ports:
+      - "8000:8000"
+      - "5678:5678"  # debugpy port
