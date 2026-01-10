@@ -1,4 +1,4 @@
-.PHONY: help build dev prod stop logs shell test clean compile deps deploy
+.PHONY: help build dev prod stop logs shell test clean compile deps deploy webui-logs
 
 # Variables
 IMAGE_NAME := llm-router
@@ -7,25 +7,26 @@ REGISTRY ?= docker.io/yourname
 
 # Default target
 help:
-	@echo "LLM Router - Docker Commands"
+	@echo "LLM Router & Open WebUI - Docker Commands"
 	@echo ""
 	@echo "Development:"
-	@echo "  make dev          - Run in development mode with hot reload"
-	@echo "  make shell        - Open shell in running container"
-	@echo "  make logs         - Follow application logs"
+	@echo "  make dev          - Run both services in development mode"
+	@echo "  make shell        - Open shell in LLM Router container"
+	@echo "  make logs         - Follow LLM Router logs"
+	@echo "  make webui-logs   - Follow Open WebUI logs"
 	@echo ""
 	@echo "Production:"
-	@echo "  make build        - Build production image"
-	@echo "  make prod         - Run in production mode"
-	@echo "  make test         - Run tests in container"
+	@echo "  make build        - Build LLM Router production image"
+	@echo "  make prod         - Run both services in production mode"
+	@echo "  make test         - Run tests in LLM Router container"
 	@echo ""
 	@echo "Maintenance:"
 	@echo "  make compile      - Compile requirements.txt from requirements.in"
 	@echo "  make deps         - Sync local dependencies"
-	@echo "  make clean        - Remove containers and images"
+	@echo "  make clean        - Remove all containers and images"
 	@echo ""
 	@echo "Deployment:"
-	@echo "  make deploy       - Build and push to registry"
+	@echo "  make deploy       - Build and push LLM Router to registry"
 
 # Development
 dev:
@@ -46,6 +47,9 @@ stop:
 
 logs:
 	docker-compose logs -f llm-router
+
+webui-logs:
+	docker-compose logs -f open-webui
 
 shell:
 	docker-compose exec llm-router bash
