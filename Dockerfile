@@ -69,27 +69,3 @@ EXPOSE 8000
 
 # Default command
 CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
-
-# ================================
-# Development stage - for debugging
-# ================================
-FROM runtime as development
-
-# Switch back to root for development
-USER root
-
-# Install debug tools
-RUN pip install --no-cache-dir debugpy
-
-# Expose debug port
-EXPOSE 5678
-
-# Install development dependencies
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir -e .
-
-# Switch back to appuser
-USER appuser
-
-# Development command with debug
-CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
