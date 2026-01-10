@@ -15,11 +15,11 @@ services:
       - "${PORT:-8000}:8000"
 
     environment:
-      # Provider API Keys
-      OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY is required}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?ANTHROPIC_API_KEY is required}
-      GOOGLE_API_KEY: ${GOOGLE_API_KEY:?GOOGLE_API_KEY is required}
-      XAI_API_KEY: ${XAI_API_KEY:?XAI_API_KEY is required}
+      # Provider API Keys (set in .env file)
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      XAI_API_KEY: ${XAI_API_KEY:-}
 
       # Application Configuration
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
